@@ -1,0 +1,16 @@
+2.2.3
+SFCGAL-dev
+curl-dev
+expat-dev
+geos-dev
+json-c-dev
+libjpeg-turbo-dev
+libwebp-dev
+libxml2-dev
+ocl-icd-dev
+pcre-dev
+pkgconfig(bash-completion)
+postgresql-dev
+qhull-dev
+unixODBC-dev
+xerces-c-dev
