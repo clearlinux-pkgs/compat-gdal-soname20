@@ -4,3 +4,5 @@ pkgconfig(hdf5)
 giflib-dev
 json-c
 json-c-dev
+apache-ant
+buildreq-mvn

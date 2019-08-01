@@ -4,15 +4,12 @@
 #
 Name     : compat-gdal-soname20
 Version  : 2.2.3
-Release  : 1
+Release  : 2
 URL      : http://download.osgeo.org/gdal/2.2.3/gdal-2.2.3.tar.xz
 Source0  : http://download.osgeo.org/gdal/2.2.3/gdal-2.2.3.tar.xz
 Summary  : Geospatial Data Abstraction Library
 Group    : Development/Tools
 License  : Apache-2.0 BSD-3-Clause LGPL-2.0 Libpng MIT Qhull
-Requires: compat-gdal-soname20-bin = %{version}-%{release}
-Requires: compat-gdal-soname20-config = %{version}-%{release}
-Requires: compat-gdal-soname20-data = %{version}-%{release}
 Requires: compat-gdal-soname20-lib = %{version}-%{release}
 Requires: compat-gdal-soname20-license = %{version}-%{release}
 BuildRequires : SFCGAL-dev
@@ -37,58 +34,12 @@ BuildRequires : unixODBC-dev
 BuildRequires : xerces-c-dev
 
 %description
-zlib 1.2.3 is a general purpose data compression library.
-All the code is thread safe. The data format used by the zlib library
-is described by RFCs (Request for Comments) 1950 to 1952 in the files
-ftp://ds.internic.net/rfc/rfc1950.txt (zlib format), rfc1951.txt (deflate
-format) and rfc1952.txt (gzip format). These documents are also available in
-other formats from ftp://ftp.uu.net/graphics/png/documents/zlib/zdoc-index.html
-
-%package bin
-Summary: bin components for the compat-gdal-soname20 package.
-Group: Binaries
-Requires: compat-gdal-soname20-data = %{version}-%{release}
-Requires: compat-gdal-soname20-config = %{version}-%{release}
-Requires: compat-gdal-soname20-license = %{version}-%{release}
-
-%description bin
-bin components for the compat-gdal-soname20 package.
-
-
-%package config
-Summary: config components for the compat-gdal-soname20 package.
-Group: Default
-
-%description config
-config components for the compat-gdal-soname20 package.
-
-
-%package data
-Summary: data components for the compat-gdal-soname20 package.
-Group: Data
-
-%description data
-data components for the compat-gdal-soname20 package.
-
-
-%package dev
-Summary: dev components for the compat-gdal-soname20 package.
-Group: Development
-Requires: compat-gdal-soname20-lib = %{version}-%{release}
-Requires: compat-gdal-soname20-bin = %{version}-%{release}
-Requires: compat-gdal-soname20-data = %{version}-%{release}
-Provides: compat-gdal-soname20-devel = %{version}-%{release}
-Requires: compat-gdal-soname20 = %{version}-%{release}
-Requires: compat-gdal-soname20 = %{version}-%{release}
-
-%description dev
-dev components for the compat-gdal-soname20 package.
-
+The .i files in this directory are generated files and should not be edited
+manually.
 
 %package lib
 Summary: lib components for the compat-gdal-soname20 package.
 Group: Libraries
-Requires: compat-gdal-soname20-data = %{version}-%{release}
 Requires: compat-gdal-soname20-license = %{version}-%{release}
 
 %description lib
@@ -110,8 +61,9 @@ license components for the compat-gdal-soname20 package.
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
-export LANG=C
-export SOURCE_DATE_EPOCH=1558965670
+export LANG=C.UTF-8
+export SOURCE_DATE_EPOCH=1564681723
+export GCC_IGNORE_WERROR=1
 export CFLAGS="$CFLAGS -fno-lto "
 export FCFLAGS="$CFLAGS -fno-lto "
 export FFLAGS="$CFLAGS -fno-lto "
@@ -120,7 +72,7 @@ export CXXFLAGS="$CXXFLAGS -fno-lto "
 make  %{?_smp_mflags}
 
 %install
-export SOURCE_DATE_EPOCH=1558965670
+export SOURCE_DATE_EPOCH=1564681723
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/compat-gdal-soname20
 cp LICENSE.TXT %{buildroot}/usr/share/package-licenses/compat-gdal-soname20/LICENSE.TXT
@@ -133,215 +85,204 @@ cp ogr/ogrsf_frmts/geojson/libjson/COPYING %{buildroot}/usr/share/package-licens
 cp ogr/ogrsf_frmts/shape/COPYING %{buildroot}/usr/share/package-licenses/compat-gdal-soname20/ogr_ogrsf_frmts_shape_COPYING
 cp port/LICENCE_minizip %{buildroot}/usr/share/package-licenses/compat-gdal-soname20/port_LICENCE_minizip
 %make_install
+## Remove excluded files
+rm -f %{buildroot}/usr/bin/gdal-config
+rm -f %{buildroot}/usr/bin/gdal_contour
+rm -f %{buildroot}/usr/bin/gdal_grid
+rm -f %{buildroot}/usr/bin/gdal_rasterize
+rm -f %{buildroot}/usr/bin/gdal_translate
+rm -f %{buildroot}/usr/bin/gdaladdo
+rm -f %{buildroot}/usr/bin/gdalbuildvrt
+rm -f %{buildroot}/usr/bin/gdaldem
+rm -f %{buildroot}/usr/bin/gdalenhance
+rm -f %{buildroot}/usr/bin/gdalinfo
+rm -f %{buildroot}/usr/bin/gdallocationinfo
+rm -f %{buildroot}/usr/bin/gdalmanage
+rm -f %{buildroot}/usr/bin/gdalserver
+rm -f %{buildroot}/usr/bin/gdalsrsinfo
+rm -f %{buildroot}/usr/bin/gdaltindex
+rm -f %{buildroot}/usr/bin/gdaltransform
+rm -f %{buildroot}/usr/bin/gdalwarp
+rm -f %{buildroot}/usr/bin/gnmanalyse
+rm -f %{buildroot}/usr/bin/gnmmanage
+rm -f %{buildroot}/usr/bin/nearblack
+rm -f %{buildroot}/usr/bin/ogr2ogr
+rm -f %{buildroot}/usr/bin/ogrinfo
+rm -f %{buildroot}/usr/bin/ogrlineref
+rm -f %{buildroot}/usr/bin/ogrtindex
+rm -f %{buildroot}/usr/bin/testepsg
+rm -f %{buildroot}/usr/etc/bash_completion.d/gdal-bash-completion.sh
+rm -f %{buildroot}/usr/include/cpl_atomic_ops.h
+rm -f %{buildroot}/usr/include/cpl_aws.h
+rm -f %{buildroot}/usr/include/cpl_config.h
+rm -f %{buildroot}/usr/include/cpl_config_extras.h
+rm -f %{buildroot}/usr/include/cpl_conv.h
+rm -f %{buildroot}/usr/include/cpl_cpu_features.h
+rm -f %{buildroot}/usr/include/cpl_csv.h
+rm -f %{buildroot}/usr/include/cpl_error.h
+rm -f %{buildroot}/usr/include/cpl_google_cloud.h
+rm -f %{buildroot}/usr/include/cpl_hash_set.h
+rm -f %{buildroot}/usr/include/cpl_http.h
+rm -f %{buildroot}/usr/include/cpl_list.h
+rm -f %{buildroot}/usr/include/cpl_minixml.h
+rm -f %{buildroot}/usr/include/cpl_minizip_ioapi.h
+rm -f %{buildroot}/usr/include/cpl_minizip_unzip.h
+rm -f %{buildroot}/usr/include/cpl_minizip_zip.h
+rm -f %{buildroot}/usr/include/cpl_multiproc.h
+rm -f %{buildroot}/usr/include/cpl_odbc.h
+rm -f %{buildroot}/usr/include/cpl_port.h
+rm -f %{buildroot}/usr/include/cpl_progress.h
+rm -f %{buildroot}/usr/include/cpl_quad_tree.h
+rm -f %{buildroot}/usr/include/cpl_sha1.h
+rm -f %{buildroot}/usr/include/cpl_sha256.h
+rm -f %{buildroot}/usr/include/cpl_spawn.h
+rm -f %{buildroot}/usr/include/cpl_string.h
+rm -f %{buildroot}/usr/include/cpl_time.h
+rm -f %{buildroot}/usr/include/cpl_virtualmem.h
+rm -f %{buildroot}/usr/include/cpl_vsi.h
+rm -f %{buildroot}/usr/include/cpl_vsi_error.h
+rm -f %{buildroot}/usr/include/cpl_vsi_virtual.h
+rm -f %{buildroot}/usr/include/cpl_vsil_curl_priv.h
+rm -f %{buildroot}/usr/include/cpl_worker_thread_pool.h
+rm -f %{buildroot}/usr/include/cplkeywordparser.h
+rm -f %{buildroot}/usr/include/gdal.h
+rm -f %{buildroot}/usr/include/gdal_alg.h
+rm -f %{buildroot}/usr/include/gdal_alg_priv.h
+rm -f %{buildroot}/usr/include/gdal_csv.h
+rm -f %{buildroot}/usr/include/gdal_frmts.h
+rm -f %{buildroot}/usr/include/gdal_mdreader.h
+rm -f %{buildroot}/usr/include/gdal_pam.h
+rm -f %{buildroot}/usr/include/gdal_priv.h
+rm -f %{buildroot}/usr/include/gdal_proxy.h
+rm -f %{buildroot}/usr/include/gdal_rat.h
+rm -f %{buildroot}/usr/include/gdal_simplesurf.h
+rm -f %{buildroot}/usr/include/gdal_utils.h
+rm -f %{buildroot}/usr/include/gdal_version.h
+rm -f %{buildroot}/usr/include/gdal_vrt.h
+rm -f %{buildroot}/usr/include/gdalexif.h
+rm -f %{buildroot}/usr/include/gdalgeorefpamdataset.h
+rm -f %{buildroot}/usr/include/gdalgrid.h
+rm -f %{buildroot}/usr/include/gdalgrid_priv.h
+rm -f %{buildroot}/usr/include/gdaljp2abstractdataset.h
+rm -f %{buildroot}/usr/include/gdaljp2metadata.h
+rm -f %{buildroot}/usr/include/gdaljp2metadatagenerator.h
+rm -f %{buildroot}/usr/include/gdalpansharpen.h
+rm -f %{buildroot}/usr/include/gdalsse_priv.h
+rm -f %{buildroot}/usr/include/gdalwarper.h
+rm -f %{buildroot}/usr/include/gdalwarpkernel_opencl.h
+rm -f %{buildroot}/usr/include/gnm.h
+rm -f %{buildroot}/usr/include/gnm_api.h
+rm -f %{buildroot}/usr/include/gnmgraph.h
+rm -f %{buildroot}/usr/include/gvgcpfit.h
+rm -f %{buildroot}/usr/include/internal_qhull_headers.h
+rm -f %{buildroot}/usr/include/memdataset.h
+rm -f %{buildroot}/usr/include/ogr_api.h
+rm -f %{buildroot}/usr/include/ogr_core.h
+rm -f %{buildroot}/usr/include/ogr_feature.h
+rm -f %{buildroot}/usr/include/ogr_featurestyle.h
+rm -f %{buildroot}/usr/include/ogr_geocoding.h
+rm -f %{buildroot}/usr/include/ogr_geometry.h
+rm -f %{buildroot}/usr/include/ogr_p.h
+rm -f %{buildroot}/usr/include/ogr_spatialref.h
+rm -f %{buildroot}/usr/include/ogr_srs_api.h
+rm -f %{buildroot}/usr/include/ogrsf_frmts.h
+rm -f %{buildroot}/usr/include/rawdataset.h
+rm -f %{buildroot}/usr/include/thinplatespline.h
+rm -f %{buildroot}/usr/include/vrtdataset.h
+rm -f %{buildroot}/usr/lib64/libgdal.so
+rm -f %{buildroot}/usr/lib64/pkgconfig/gdal.pc
+rm -f %{buildroot}/usr/share/gdal/GDALLogoBW.svg
+rm -f %{buildroot}/usr/share/gdal/GDALLogoColor.svg
+rm -f %{buildroot}/usr/share/gdal/GDALLogoGS.svg
+rm -f %{buildroot}/usr/share/gdal/LICENSE.TXT
+rm -f %{buildroot}/usr/share/gdal/compdcs.csv
+rm -f %{buildroot}/usr/share/gdal/coordinate_axis.csv
+rm -f %{buildroot}/usr/share/gdal/cubewerx_extra.wkt
+rm -f %{buildroot}/usr/share/gdal/datum_shift.csv
+rm -f %{buildroot}/usr/share/gdal/default.rsc
+rm -f %{buildroot}/usr/share/gdal/ecw_cs.wkt
+rm -f %{buildroot}/usr/share/gdal/ellipsoid.csv
+rm -f %{buildroot}/usr/share/gdal/epsg.wkt
+rm -f %{buildroot}/usr/share/gdal/esri_StatePlane_extra.wkt
+rm -f %{buildroot}/usr/share/gdal/esri_Wisconsin_extra.wkt
+rm -f %{buildroot}/usr/share/gdal/esri_extra.wkt
+rm -f %{buildroot}/usr/share/gdal/gcs.csv
+rm -f %{buildroot}/usr/share/gdal/gcs.override.csv
+rm -f %{buildroot}/usr/share/gdal/gdal_datum.csv
+rm -f %{buildroot}/usr/share/gdal/gdalicon.png
+rm -f %{buildroot}/usr/share/gdal/gdalvrt.xsd
+rm -f %{buildroot}/usr/share/gdal/geoccs.csv
+rm -f %{buildroot}/usr/share/gdal/gml_registry.xml
+rm -f %{buildroot}/usr/share/gdal/gmlasconf.xml
+rm -f %{buildroot}/usr/share/gdal/gmlasconf.xsd
+rm -f %{buildroot}/usr/share/gdal/gt_datum.csv
+rm -f %{buildroot}/usr/share/gdal/gt_ellips.csv
+rm -f %{buildroot}/usr/share/gdal/header.dxf
+rm -f %{buildroot}/usr/share/gdal/inspire_cp_BasicPropertyUnit.gfs
+rm -f %{buildroot}/usr/share/gdal/inspire_cp_CadastralBoundary.gfs
+rm -f %{buildroot}/usr/share/gdal/inspire_cp_CadastralParcel.gfs
+rm -f %{buildroot}/usr/share/gdal/inspire_cp_CadastralZoning.gfs
+rm -f %{buildroot}/usr/share/gdal/jpfgdgml_AdmArea.gfs
+rm -f %{buildroot}/usr/share/gdal/jpfgdgml_AdmBdry.gfs
+rm -f %{buildroot}/usr/share/gdal/jpfgdgml_AdmPt.gfs
+rm -f %{buildroot}/usr/share/gdal/jpfgdgml_BldA.gfs
+rm -f %{buildroot}/usr/share/gdal/jpfgdgml_BldL.gfs
+rm -f %{buildroot}/usr/share/gdal/jpfgdgml_Cntr.gfs
+rm -f %{buildroot}/usr/share/gdal/jpfgdgml_CommBdry.gfs
+rm -f %{buildroot}/usr/share/gdal/jpfgdgml_CommPt.gfs
+rm -f %{buildroot}/usr/share/gdal/jpfgdgml_Cstline.gfs
+rm -f %{buildroot}/usr/share/gdal/jpfgdgml_ElevPt.gfs
+rm -f %{buildroot}/usr/share/gdal/jpfgdgml_GCP.gfs
+rm -f %{buildroot}/usr/share/gdal/jpfgdgml_LeveeEdge.gfs
+rm -f %{buildroot}/usr/share/gdal/jpfgdgml_RailCL.gfs
+rm -f %{buildroot}/usr/share/gdal/jpfgdgml_RdASL.gfs
+rm -f %{buildroot}/usr/share/gdal/jpfgdgml_RdArea.gfs
+rm -f %{buildroot}/usr/share/gdal/jpfgdgml_RdCompt.gfs
+rm -f %{buildroot}/usr/share/gdal/jpfgdgml_RdEdg.gfs
+rm -f %{buildroot}/usr/share/gdal/jpfgdgml_RdMgtBdry.gfs
+rm -f %{buildroot}/usr/share/gdal/jpfgdgml_RdSgmtA.gfs
+rm -f %{buildroot}/usr/share/gdal/jpfgdgml_RvrMgtBdry.gfs
+rm -f %{buildroot}/usr/share/gdal/jpfgdgml_SBAPt.gfs
+rm -f %{buildroot}/usr/share/gdal/jpfgdgml_SBArea.gfs
+rm -f %{buildroot}/usr/share/gdal/jpfgdgml_SBBdry.gfs
+rm -f %{buildroot}/usr/share/gdal/jpfgdgml_WA.gfs
+rm -f %{buildroot}/usr/share/gdal/jpfgdgml_WL.gfs
+rm -f %{buildroot}/usr/share/gdal/jpfgdgml_WStrA.gfs
+rm -f %{buildroot}/usr/share/gdal/jpfgdgml_WStrL.gfs
+rm -f %{buildroot}/usr/share/gdal/netcdf_config.xsd
+rm -f %{buildroot}/usr/share/gdal/nitf_spec.xml
+rm -f %{buildroot}/usr/share/gdal/nitf_spec.xsd
+rm -f %{buildroot}/usr/share/gdal/ogrvrt.xsd
+rm -f %{buildroot}/usr/share/gdal/osmconf.ini
+rm -f %{buildroot}/usr/share/gdal/ozi_datum.csv
+rm -f %{buildroot}/usr/share/gdal/ozi_ellips.csv
+rm -f %{buildroot}/usr/share/gdal/pci_datum.txt
+rm -f %{buildroot}/usr/share/gdal/pci_ellips.txt
+rm -f %{buildroot}/usr/share/gdal/pcs.csv
+rm -f %{buildroot}/usr/share/gdal/pcs.override.csv
+rm -f %{buildroot}/usr/share/gdal/plscenesconf.json
+rm -f %{buildroot}/usr/share/gdal/prime_meridian.csv
+rm -f %{buildroot}/usr/share/gdal/projop_wparm.csv
+rm -f %{buildroot}/usr/share/gdal/ruian_vf_ob_v1.gfs
+rm -f %{buildroot}/usr/share/gdal/ruian_vf_st_uvoh_v1.gfs
+rm -f %{buildroot}/usr/share/gdal/ruian_vf_st_v1.gfs
+rm -f %{buildroot}/usr/share/gdal/ruian_vf_v1.gfs
+rm -f %{buildroot}/usr/share/gdal/s57agencies.csv
+rm -f %{buildroot}/usr/share/gdal/s57attributes.csv
+rm -f %{buildroot}/usr/share/gdal/s57expectedinput.csv
+rm -f %{buildroot}/usr/share/gdal/s57objectclasses.csv
+rm -f %{buildroot}/usr/share/gdal/seed_2d.dgn
+rm -f %{buildroot}/usr/share/gdal/seed_3d.dgn
+rm -f %{buildroot}/usr/share/gdal/stateplane.csv
+rm -f %{buildroot}/usr/share/gdal/trailer.dxf
+rm -f %{buildroot}/usr/share/gdal/unit_of_measure.csv
+rm -f %{buildroot}/usr/share/gdal/vdv452.xml
+rm -f %{buildroot}/usr/share/gdal/vdv452.xsd
+rm -f %{buildroot}/usr/share/gdal/vertcs.csv
+rm -f %{buildroot}/usr/share/gdal/vertcs.override.csv
 
 %files
 %defattr(-,root,root,-)
-
-%files bin
-%defattr(-,root,root,-)
-%exclude /usr/bin/gdal-config
-%exclude /usr/bin/gdal_contour
-%exclude /usr/bin/gdal_grid
-%exclude /usr/bin/gdal_rasterize
-%exclude /usr/bin/gdal_translate
-%exclude /usr/bin/gdaladdo
-%exclude /usr/bin/gdalbuildvrt
-%exclude /usr/bin/gdaldem
-%exclude /usr/bin/gdalenhance
-%exclude /usr/bin/gdalinfo
-%exclude /usr/bin/gdallocationinfo
-%exclude /usr/bin/gdalmanage
-%exclude /usr/bin/gdalserver
-%exclude /usr/bin/gdalsrsinfo
-%exclude /usr/bin/gdaltindex
-%exclude /usr/bin/gdaltransform
-%exclude /usr/bin/gdalwarp
-%exclude /usr/bin/gnmanalyse
-%exclude /usr/bin/gnmmanage
-%exclude /usr/bin/nearblack
-%exclude /usr/bin/ogr2ogr
-%exclude /usr/bin/ogrinfo
-%exclude /usr/bin/ogrlineref
-%exclude /usr/bin/ogrtindex
-%exclude /usr/bin/testepsg
-
-%files config
-%defattr(-,root,root,-)
-%exclude /usr/etc/bash_completion.d/gdal-bash-completion.sh
-
-%files data
-%defattr(-,root,root,-)
-%exclude /usr/share/gdal/GDALLogoBW.svg
-%exclude /usr/share/gdal/GDALLogoColor.svg
-%exclude /usr/share/gdal/GDALLogoGS.svg
-%exclude /usr/share/gdal/LICENSE.TXT
-%exclude /usr/share/gdal/compdcs.csv
-%exclude /usr/share/gdal/coordinate_axis.csv
-%exclude /usr/share/gdal/cubewerx_extra.wkt
-%exclude /usr/share/gdal/datum_shift.csv
-%exclude /usr/share/gdal/default.rsc
-%exclude /usr/share/gdal/ecw_cs.wkt
-%exclude /usr/share/gdal/ellipsoid.csv
-%exclude /usr/share/gdal/epsg.wkt
-%exclude /usr/share/gdal/esri_StatePlane_extra.wkt
-%exclude /usr/share/gdal/esri_Wisconsin_extra.wkt
-%exclude /usr/share/gdal/esri_extra.wkt
-%exclude /usr/share/gdal/gcs.csv
-%exclude /usr/share/gdal/gcs.override.csv
-%exclude /usr/share/gdal/gdal_datum.csv
-%exclude /usr/share/gdal/gdalicon.png
-%exclude /usr/share/gdal/gdalvrt.xsd
-%exclude /usr/share/gdal/geoccs.csv
-%exclude /usr/share/gdal/gml_registry.xml
-%exclude /usr/share/gdal/gmlasconf.xml
-%exclude /usr/share/gdal/gmlasconf.xsd
-%exclude /usr/share/gdal/gt_datum.csv
-%exclude /usr/share/gdal/gt_ellips.csv
-%exclude /usr/share/gdal/header.dxf
-%exclude /usr/share/gdal/inspire_cp_BasicPropertyUnit.gfs
-%exclude /usr/share/gdal/inspire_cp_CadastralBoundary.gfs
-%exclude /usr/share/gdal/inspire_cp_CadastralParcel.gfs
-%exclude /usr/share/gdal/inspire_cp_CadastralZoning.gfs
-%exclude /usr/share/gdal/jpfgdgml_AdmArea.gfs
-%exclude /usr/share/gdal/jpfgdgml_AdmBdry.gfs
-%exclude /usr/share/gdal/jpfgdgml_AdmPt.gfs
-%exclude /usr/share/gdal/jpfgdgml_BldA.gfs
-%exclude /usr/share/gdal/jpfgdgml_BldL.gfs
-%exclude /usr/share/gdal/jpfgdgml_Cntr.gfs
-%exclude /usr/share/gdal/jpfgdgml_CommBdry.gfs
-%exclude /usr/share/gdal/jpfgdgml_CommPt.gfs
-%exclude /usr/share/gdal/jpfgdgml_Cstline.gfs
-%exclude /usr/share/gdal/jpfgdgml_ElevPt.gfs
-%exclude /usr/share/gdal/jpfgdgml_GCP.gfs
-%exclude /usr/share/gdal/jpfgdgml_LeveeEdge.gfs
-%exclude /usr/share/gdal/jpfgdgml_RailCL.gfs
-%exclude /usr/share/gdal/jpfgdgml_RdASL.gfs
-%exclude /usr/share/gdal/jpfgdgml_RdArea.gfs
-%exclude /usr/share/gdal/jpfgdgml_RdCompt.gfs
-%exclude /usr/share/gdal/jpfgdgml_RdEdg.gfs
-%exclude /usr/share/gdal/jpfgdgml_RdMgtBdry.gfs
-%exclude /usr/share/gdal/jpfgdgml_RdSgmtA.gfs
-%exclude /usr/share/gdal/jpfgdgml_RvrMgtBdry.gfs
-%exclude /usr/share/gdal/jpfgdgml_SBAPt.gfs
-%exclude /usr/share/gdal/jpfgdgml_SBArea.gfs
-%exclude /usr/share/gdal/jpfgdgml_SBBdry.gfs
-%exclude /usr/share/gdal/jpfgdgml_WA.gfs
-%exclude /usr/share/gdal/jpfgdgml_WL.gfs
-%exclude /usr/share/gdal/jpfgdgml_WStrA.gfs
-%exclude /usr/share/gdal/jpfgdgml_WStrL.gfs
-%exclude /usr/share/gdal/netcdf_config.xsd
-%exclude /usr/share/gdal/nitf_spec.xml
-%exclude /usr/share/gdal/nitf_spec.xsd
-%exclude /usr/share/gdal/ogrvrt.xsd
-%exclude /usr/share/gdal/osmconf.ini
-%exclude /usr/share/gdal/ozi_datum.csv
-%exclude /usr/share/gdal/ozi_ellips.csv
-%exclude /usr/share/gdal/pci_datum.txt
-%exclude /usr/share/gdal/pci_ellips.txt
-%exclude /usr/share/gdal/pcs.csv
-%exclude /usr/share/gdal/pcs.override.csv
-%exclude /usr/share/gdal/plscenesconf.json
-%exclude /usr/share/gdal/prime_meridian.csv
-%exclude /usr/share/gdal/projop_wparm.csv
-%exclude /usr/share/gdal/ruian_vf_ob_v1.gfs
-%exclude /usr/share/gdal/ruian_vf_st_uvoh_v1.gfs
-%exclude /usr/share/gdal/ruian_vf_st_v1.gfs
-%exclude /usr/share/gdal/ruian_vf_v1.gfs
-%exclude /usr/share/gdal/s57agencies.csv
-%exclude /usr/share/gdal/s57attributes.csv
-%exclude /usr/share/gdal/s57expectedinput.csv
-%exclude /usr/share/gdal/s57objectclasses.csv
-%exclude /usr/share/gdal/seed_2d.dgn
-%exclude /usr/share/gdal/seed_3d.dgn
-%exclude /usr/share/gdal/stateplane.csv
-%exclude /usr/share/gdal/trailer.dxf
-%exclude /usr/share/gdal/unit_of_measure.csv
-%exclude /usr/share/gdal/vdv452.xml
-%exclude /usr/share/gdal/vdv452.xsd
-%exclude /usr/share/gdal/vertcs.csv
-%exclude /usr/share/gdal/vertcs.override.csv
-
-%files dev
-%defattr(-,root,root,-)
-%exclude /usr/include/cpl_atomic_ops.h
-%exclude /usr/include/cpl_aws.h
-%exclude /usr/include/cpl_config.h
-%exclude /usr/include/cpl_config_extras.h
-%exclude /usr/include/cpl_conv.h
-%exclude /usr/include/cpl_cpu_features.h
-%exclude /usr/include/cpl_csv.h
-%exclude /usr/include/cpl_error.h
-%exclude /usr/include/cpl_google_cloud.h
-%exclude /usr/include/cpl_hash_set.h
-%exclude /usr/include/cpl_http.h
-%exclude /usr/include/cpl_list.h
-%exclude /usr/include/cpl_minixml.h
-%exclude /usr/include/cpl_minizip_ioapi.h
-%exclude /usr/include/cpl_minizip_unzip.h
-%exclude /usr/include/cpl_minizip_zip.h
-%exclude /usr/include/cpl_multiproc.h
-%exclude /usr/include/cpl_odbc.h
-%exclude /usr/include/cpl_port.h
-%exclude /usr/include/cpl_progress.h
-%exclude /usr/include/cpl_quad_tree.h
-%exclude /usr/include/cpl_sha1.h
-%exclude /usr/include/cpl_sha256.h
-%exclude /usr/include/cpl_spawn.h
-%exclude /usr/include/cpl_string.h
-%exclude /usr/include/cpl_time.h
-%exclude /usr/include/cpl_virtualmem.h
-%exclude /usr/include/cpl_vsi.h
-%exclude /usr/include/cpl_vsi_error.h
-%exclude /usr/include/cpl_vsi_virtual.h
-%exclude /usr/include/cpl_vsil_curl_priv.h
-%exclude /usr/include/cpl_worker_thread_pool.h
-%exclude /usr/include/cplkeywordparser.h
-%exclude /usr/include/gdal.h
-%exclude /usr/include/gdal_alg.h
-%exclude /usr/include/gdal_alg_priv.h
-%exclude /usr/include/gdal_csv.h
-%exclude /usr/include/gdal_frmts.h
-%exclude /usr/include/gdal_mdreader.h
-%exclude /usr/include/gdal_pam.h
-%exclude /usr/include/gdal_priv.h
-%exclude /usr/include/gdal_proxy.h
-%exclude /usr/include/gdal_rat.h
-%exclude /usr/include/gdal_simplesurf.h
-%exclude /usr/include/gdal_utils.h
-%exclude /usr/include/gdal_version.h
-%exclude /usr/include/gdal_vrt.h
-%exclude /usr/include/gdalexif.h
-%exclude /usr/include/gdalgeorefpamdataset.h
-%exclude /usr/include/gdalgrid.h
-%exclude /usr/include/gdalgrid_priv.h
-%exclude /usr/include/gdaljp2abstractdataset.h
-%exclude /usr/include/gdaljp2metadata.h
-%exclude /usr/include/gdaljp2metadatagenerator.h
-%exclude /usr/include/gdalpansharpen.h
-%exclude /usr/include/gdalsse_priv.h
-%exclude /usr/include/gdalwarper.h
-%exclude /usr/include/gdalwarpkernel_opencl.h
-%exclude /usr/include/gnm.h
-%exclude /usr/include/gnm_api.h
-%exclude /usr/include/gnmgraph.h
-%exclude /usr/include/gvgcpfit.h
-%exclude /usr/include/internal_qhull_headers.h
-%exclude /usr/include/memdataset.h
-%exclude /usr/include/ogr_api.h
-%exclude /usr/include/ogr_core.h
-%exclude /usr/include/ogr_feature.h
-%exclude /usr/include/ogr_featurestyle.h
-%exclude /usr/include/ogr_geocoding.h
-%exclude /usr/include/ogr_geometry.h
-%exclude /usr/include/ogr_p.h
-%exclude /usr/include/ogr_spatialref.h
-%exclude /usr/include/ogr_srs_api.h
-%exclude /usr/include/ogrsf_frmts.h
-%exclude /usr/include/rawdataset.h
-%exclude /usr/include/thinplatespline.h
-%exclude /usr/include/vrtdataset.h
-%exclude /usr/lib64/libgdal.so
-%exclude /usr/lib64/pkgconfig/gdal.pc
 
 %files lib
 %defattr(-,root,root,-)
@@ -350,12 +291,12 @@ cp port/LICENCE_minizip %{buildroot}/usr/share/package-licenses/compat-gdal-sona
 
 %files license
 %defattr(0644,root,root,0755)
-%exclude /usr/share/package-licenses/compat-gdal-soname20/LICENSE.TXT
-%exclude /usr/share/package-licenses/compat-gdal-soname20/alg_internal_libqhull_COPYING.txt
-%exclude /usr/share/package-licenses/compat-gdal-soname20/frmts_gif_giflib_COPYING
-%exclude /usr/share/package-licenses/compat-gdal-soname20/frmts_mrf_libLERC_LICENSE.TXT
-%exclude /usr/share/package-licenses/compat-gdal-soname20/frmts_pcraster_libcsf_COPYING
-%exclude /usr/share/package-licenses/compat-gdal-soname20/frmts_png_libpng_LICENSE
-%exclude /usr/share/package-licenses/compat-gdal-soname20/ogr_ogrsf_frmts_geojson_libjson_COPYING
-%exclude /usr/share/package-licenses/compat-gdal-soname20/ogr_ogrsf_frmts_shape_COPYING
-%exclude /usr/share/package-licenses/compat-gdal-soname20/port_LICENCE_minizip
+/usr/share/package-licenses/compat-gdal-soname20/LICENSE.TXT
+/usr/share/package-licenses/compat-gdal-soname20/alg_internal_libqhull_COPYING.txt
+/usr/share/package-licenses/compat-gdal-soname20/frmts_gif_giflib_COPYING
+/usr/share/package-licenses/compat-gdal-soname20/frmts_mrf_libLERC_LICENSE.TXT
+/usr/share/package-licenses/compat-gdal-soname20/frmts_pcraster_libcsf_COPYING
+/usr/share/package-licenses/compat-gdal-soname20/frmts_png_libpng_LICENSE
+/usr/share/package-licenses/compat-gdal-soname20/ogr_ogrsf_frmts_geojson_libjson_COPYING
+/usr/share/package-licenses/compat-gdal-soname20/ogr_ogrsf_frmts_shape_COPYING
+/usr/share/package-licenses/compat-gdal-soname20/port_LICENCE_minizip
