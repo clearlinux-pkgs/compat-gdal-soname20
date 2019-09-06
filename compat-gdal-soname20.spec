@@ -4,7 +4,7 @@
 #
 Name     : compat-gdal-soname20
 Version  : 2.2.3
-Release  : 2
+Release  : 3
 URL      : http://download.osgeo.org/gdal/2.2.3/gdal-2.2.3.tar.xz
 Source0  : http://download.osgeo.org/gdal/2.2.3/gdal-2.2.3.tar.xz
 Summary  : Geospatial Data Abstraction Library
@@ -13,6 +13,7 @@ License  : Apache-2.0 BSD-3-Clause LGPL-2.0 Libpng MIT Qhull
 Requires: compat-gdal-soname20-lib = %{version}-%{release}
 Requires: compat-gdal-soname20-license = %{version}-%{release}
 BuildRequires : SFCGAL-dev
+BuildRequires : apache-maven
 BuildRequires : buildreq-cpan
 BuildRequires : buildreq-distutils3
 BuildRequires : curl-dev
@@ -32,6 +33,8 @@ BuildRequires : qhull-dev
 BuildRequires : tiff-dev
 BuildRequires : unixODBC-dev
 BuildRequires : xerces-c-dev
+# Suppress generation of debuginfo
+%global debug_package %{nil}
 
 %description
 The .i files in this directory are generated files and should not be edited
@@ -62,7 +65,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1564681723
+export SOURCE_DATE_EPOCH=1567808534
 export GCC_IGNORE_WERROR=1
 export CFLAGS="$CFLAGS -fno-lto "
 export FCFLAGS="$CFLAGS -fno-lto "
@@ -72,7 +75,7 @@ export CXXFLAGS="$CXXFLAGS -fno-lto "
 make  %{?_smp_mflags}
 
 %install
-export SOURCE_DATE_EPOCH=1564681723
+export SOURCE_DATE_EPOCH=1567808534
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/compat-gdal-soname20
 cp LICENSE.TXT %{buildroot}/usr/share/package-licenses/compat-gdal-soname20/LICENSE.TXT
