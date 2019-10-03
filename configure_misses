@@ -25,10 +25,6 @@ Configure miss: csf.h presence
 Configure miss: csf.h
 Configure miss: gta_version in -lgta
 Configure miss: XTIFFClientOpen in -lgeotiff
-Configure miss: DGifOpenFileName in -lgif
-Configure miss: gif_lib.h usability
-Configure miss: gif_lib.h presence
-Configure miss: gif_lib.h
 Configure miss: ecs.h usability
 Configure miss: ecs.h presence
 Configure miss: ecs.h
@@ -82,7 +78,6 @@ Configure miss: freexl_open in -lfreexl
 Configure miss: freexl_open in -lfreexl
 Configure miss: freexl_open in -lfreexl
 Configure miss: freexl_open in -lfreexl
-Configure miss: json_object_set_serializer in -ljson-c
 Configure miss: whether to build PDF driver as a plugin
 Configure miss: whether we should include Java support
 Configure miss: whether we should include MDB support
