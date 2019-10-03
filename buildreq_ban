@@ -1,8 +1,5 @@
 # This file contains build requirements that get picked up but are
 # undesirable. One entry per line, no whitespace.
 pkgconfig(hdf5)
-giflib-dev
-json-c
-json-c-dev
 apache-ant
 buildreq-mvn

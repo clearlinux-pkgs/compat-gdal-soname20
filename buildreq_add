@@ -4,3 +4,6 @@ hdf5-dev
 libpng-dev
 tiff-dev
 libfastjson-dev
+giflib-dev
+json-c
+json-c-dev
