@@ -4,7 +4,7 @@
 #
 Name     : compat-gdal-soname20
 Version  : 2.2.3
-Release  : 6
+Release  : 7
 URL      : http://download.osgeo.org/gdal/2.2.3/gdal-2.2.3.tar.xz
 Source0  : http://download.osgeo.org/gdal/2.2.3/gdal-2.2.3.tar.xz
 Summary  : Geospatial Data Abstraction Library
@@ -70,7 +70,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1570229080
+export SOURCE_DATE_EPOCH=1571110891
 export GCC_IGNORE_WERROR=1
 export CFLAGS="$CFLAGS -fno-lto "
 export FCFLAGS="$CFLAGS -fno-lto "
@@ -85,18 +85,18 @@ export CXXFLAGS="$CXXFLAGS -fno-lto "
 make  %{?_smp_mflags}
 
 %install
-export SOURCE_DATE_EPOCH=1570229080
+export SOURCE_DATE_EPOCH=1571110891
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/compat-gdal-soname20
-cp LICENSE.TXT %{buildroot}/usr/share/package-licenses/compat-gdal-soname20/LICENSE.TXT
-cp alg/internal_libqhull/COPYING.txt %{buildroot}/usr/share/package-licenses/compat-gdal-soname20/alg_internal_libqhull_COPYING.txt
-cp frmts/gif/giflib/COPYING %{buildroot}/usr/share/package-licenses/compat-gdal-soname20/frmts_gif_giflib_COPYING
-cp frmts/mrf/libLERC/LICENSE.TXT %{buildroot}/usr/share/package-licenses/compat-gdal-soname20/frmts_mrf_libLERC_LICENSE.TXT
-cp frmts/pcraster/libcsf/COPYING %{buildroot}/usr/share/package-licenses/compat-gdal-soname20/frmts_pcraster_libcsf_COPYING
-cp frmts/png/libpng/LICENSE %{buildroot}/usr/share/package-licenses/compat-gdal-soname20/frmts_png_libpng_LICENSE
-cp ogr/ogrsf_frmts/geojson/libjson/COPYING %{buildroot}/usr/share/package-licenses/compat-gdal-soname20/ogr_ogrsf_frmts_geojson_libjson_COPYING
-cp ogr/ogrsf_frmts/shape/COPYING %{buildroot}/usr/share/package-licenses/compat-gdal-soname20/ogr_ogrsf_frmts_shape_COPYING
-cp port/LICENCE_minizip %{buildroot}/usr/share/package-licenses/compat-gdal-soname20/port_LICENCE_minizip
+cp %{_builddir}/gdal-2.2.3/LICENSE.TXT %{buildroot}/usr/share/package-licenses/compat-gdal-soname20/3c5056c99522acf3d9e2c2a2f61fdeeffced4174
+cp %{_builddir}/gdal-2.2.3/alg/internal_libqhull/COPYING.txt %{buildroot}/usr/share/package-licenses/compat-gdal-soname20/baf1d15dcf66b1e1dfee80eb405aa73105842017
+cp %{_builddir}/gdal-2.2.3/frmts/gif/giflib/COPYING %{buildroot}/usr/share/package-licenses/compat-gdal-soname20/f9c9a2d3495a0766b4cf20d4b90cfe714dab3dc1
+cp %{_builddir}/gdal-2.2.3/frmts/mrf/libLERC/LICENSE.TXT %{buildroot}/usr/share/package-licenses/compat-gdal-soname20/3035b519169390d1aaa3a43267deaae5cdff8a9b
+cp %{_builddir}/gdal-2.2.3/frmts/pcraster/libcsf/COPYING %{buildroot}/usr/share/package-licenses/compat-gdal-soname20/1d982db70b88f943cc7d15013c28a126339d6cbc
+cp %{_builddir}/gdal-2.2.3/frmts/png/libpng/LICENSE %{buildroot}/usr/share/package-licenses/compat-gdal-soname20/1f906240d40bc72f70c6765ed4df959defd3c153
+cp %{_builddir}/gdal-2.2.3/ogr/ogrsf_frmts/geojson/libjson/COPYING %{buildroot}/usr/share/package-licenses/compat-gdal-soname20/0cd23537e3c32497c7b87157b36f9d2eb5fca64b
+cp %{_builddir}/gdal-2.2.3/ogr/ogrsf_frmts/shape/COPYING %{buildroot}/usr/share/package-licenses/compat-gdal-soname20/df97bdf33b01f9ed42a799dd3ed7a1599dd0cb9d
+cp %{_builddir}/gdal-2.2.3/port/LICENCE_minizip %{buildroot}/usr/share/package-licenses/compat-gdal-soname20/f7f1d88d0aea6c567a2c351b08b0fe80f2582054
 %make_install
 ## Remove excluded files
 rm -f %{buildroot}/usr/bin/gdal-config
@@ -304,12 +304,12 @@ rm -f %{buildroot}/usr/share/gdal/vertcs.override.csv
 
 %files license
 %defattr(0644,root,root,0755)
-/usr/share/package-licenses/compat-gdal-soname20/LICENSE.TXT
-/usr/share/package-licenses/compat-gdal-soname20/alg_internal_libqhull_COPYING.txt
-/usr/share/package-licenses/compat-gdal-soname20/frmts_gif_giflib_COPYING
-/usr/share/package-licenses/compat-gdal-soname20/frmts_mrf_libLERC_LICENSE.TXT
-/usr/share/package-licenses/compat-gdal-soname20/frmts_pcraster_libcsf_COPYING
-/usr/share/package-licenses/compat-gdal-soname20/frmts_png_libpng_LICENSE
-/usr/share/package-licenses/compat-gdal-soname20/ogr_ogrsf_frmts_geojson_libjson_COPYING
-/usr/share/package-licenses/compat-gdal-soname20/ogr_ogrsf_frmts_shape_COPYING
-/usr/share/package-licenses/compat-gdal-soname20/port_LICENCE_minizip
+/usr/share/package-licenses/compat-gdal-soname20/0cd23537e3c32497c7b87157b36f9d2eb5fca64b
+/usr/share/package-licenses/compat-gdal-soname20/1d982db70b88f943cc7d15013c28a126339d6cbc
+/usr/share/package-licenses/compat-gdal-soname20/1f906240d40bc72f70c6765ed4df959defd3c153
+/usr/share/package-licenses/compat-gdal-soname20/3035b519169390d1aaa3a43267deaae5cdff8a9b
+/usr/share/package-licenses/compat-gdal-soname20/3c5056c99522acf3d9e2c2a2f61fdeeffced4174
+/usr/share/package-licenses/compat-gdal-soname20/baf1d15dcf66b1e1dfee80eb405aa73105842017
+/usr/share/package-licenses/compat-gdal-soname20/df97bdf33b01f9ed42a799dd3ed7a1599dd0cb9d
+/usr/share/package-licenses/compat-gdal-soname20/f7f1d88d0aea6c567a2c351b08b0fe80f2582054
+/usr/share/package-licenses/compat-gdal-soname20/f9c9a2d3495a0766b4cf20d4b90cfe714dab3dc1
