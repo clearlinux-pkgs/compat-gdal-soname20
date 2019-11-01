@@ -13,4 +13,5 @@ pkgconfig(bash-completion)
 postgresql-dev
 qhull-dev
 unixODBC-dev
+util-linux
 xerces-c-dev

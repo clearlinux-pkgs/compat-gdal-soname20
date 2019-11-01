@@ -4,7 +4,7 @@
 #
 Name     : compat-gdal-soname20
 Version  : 2.2.3
-Release  : 7
+Release  : 8
 URL      : http://download.osgeo.org/gdal/2.2.3/gdal-2.2.3.tar.xz
 Source0  : http://download.osgeo.org/gdal/2.2.3/gdal-2.2.3.tar.xz
 Summary  : Geospatial Data Abstraction Library
@@ -35,10 +35,12 @@ BuildRequires : postgresql-dev
 BuildRequires : qhull-dev
 BuildRequires : tiff-dev
 BuildRequires : unixODBC-dev
+BuildRequires : util-linux
 BuildRequires : xerces-c-dev
 # Suppress generation of debuginfo
 %global debug_package %{nil}
 Patch1: 0001-Fix-compilation-error-on-json-c-external-link.patch
+Patch2: CVE-2019-17545.patch
 
 %description
 The .i files in this directory are generated files and should not be edited
@@ -63,19 +65,21 @@ license components for the compat-gdal-soname20 package.
 
 %prep
 %setup -q -n gdal-2.2.3
+cd %{_builddir}/gdal-2.2.3
 %patch1 -p1
+%patch2 -p1
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1571110891
+export SOURCE_DATE_EPOCH=1572641066
 export GCC_IGNORE_WERROR=1
-export CFLAGS="$CFLAGS -fno-lto "
-export FCFLAGS="$CFLAGS -fno-lto "
-export FFLAGS="$CFLAGS -fno-lto "
-export CXXFLAGS="$CXXFLAGS -fno-lto "
+export CFLAGS="$CFLAGS -fno-lto -fstack-protector-strong -mzero-caller-saved-regs=used "
+export FCFLAGS="$CFLAGS -fno-lto -fstack-protector-strong -mzero-caller-saved-regs=used "
+export FFLAGS="$CFLAGS -fno-lto -fstack-protector-strong -mzero-caller-saved-regs=used "
+export CXXFLAGS="$CXXFLAGS -fno-lto -fstack-protector-strong -mzero-caller-saved-regs=used "
 %configure --disable-static --datadir=/usr/share/gdal \
 --with-libtiff=yes \
 --with-png=yes \
@@ -85,7 +89,7 @@ export CXXFLAGS="$CXXFLAGS -fno-lto "
 make  %{?_smp_mflags}
 
 %install
-export SOURCE_DATE_EPOCH=1571110891
+export SOURCE_DATE_EPOCH=1572641066
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/compat-gdal-soname20
 cp %{_builddir}/gdal-2.2.3/LICENSE.TXT %{buildroot}/usr/share/package-licenses/compat-gdal-soname20/3c5056c99522acf3d9e2c2a2f61fdeeffced4174
