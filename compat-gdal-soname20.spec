@@ -4,9 +4,9 @@
 #
 Name     : compat-gdal-soname20
 Version  : 2.2.3
-Release  : 9
-URL      : http://download.osgeo.org/gdal/2.2.3/gdal-2.2.3.tar.xz
-Source0  : http://download.osgeo.org/gdal/2.2.3/gdal-2.2.3.tar.xz
+Release  : 10
+URL      : https://download.osgeo.org/gdal/2.2.3/gdal-2.2.3.tar.xz
+Source0  : https://download.osgeo.org/gdal/2.2.3/gdal-2.2.3.tar.xz
 Summary  : Geospatial Data Abstraction Library
 Group    : Development/Tools
 License  : Apache-2.0 BSD-3-Clause LGPL-2.0 Libpng MIT Qhull
@@ -73,7 +73,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1582240498
+export SOURCE_DATE_EPOCH=1582251784
 export GCC_IGNORE_WERROR=1
 export CFLAGS="$CFLAGS -fno-lto -fstack-protector-strong -mzero-caller-saved-regs=used "
 export FCFLAGS="$CFLAGS -fno-lto -fstack-protector-strong -mzero-caller-saved-regs=used "
@@ -88,7 +88,7 @@ export CXXFLAGS="$CXXFLAGS -fno-lto -fstack-protector-strong -mzero-caller-saved
 make  %{?_smp_mflags}
 
 %install
-export SOURCE_DATE_EPOCH=1582240498
+export SOURCE_DATE_EPOCH=1582251784
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/compat-gdal-soname20
 cp %{_builddir}/gdal-2.2.3/LICENSE.TXT %{buildroot}/usr/share/package-licenses/compat-gdal-soname20/3c5056c99522acf3d9e2c2a2f61fdeeffced4174
